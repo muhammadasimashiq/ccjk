@@ -13,8 +13,16 @@ jobs:
       - name: Checkout code from Bitbucket
         uses: actions/checkout@v2
         with:
-          repository: 'https://Asim-Ashiq@bitbucket.org/ccjktest/project-new.git'
-          ref: 'main'  # Change to the appropriate branch name
+          repository: 'ccjktest/project-new'
+          ref: 'main'
+          token: ${{ secrets.BITBUCKET_TOKEN }}
+          ssh-strict: true
+          persist-credentials: true
+          clean: true
+          fetch-depth: 1
+          lfs: false
+          submodules: false
+          set-safe-directory: true
 
       - name: Deploy to Deepin OS
         run: |
