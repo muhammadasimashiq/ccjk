@@ -1,0 +1,26 @@
+name: Deploy to Deepin OS
+
+on:
+  push:
+    branches:
+      - main  # Change to your main branch name in Bitbucket
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code from Bitbucket
+        uses: actions/checkout@v2
+        with:
+          repository: 'https://Asim-Ashiq@bitbucket.org/ccjktest/project-new.git'
+          ref: 'main'  # Change to the appropriate branch name
+
+      - name: Deploy to Deepin OS
+        run: |
+          # Set up SSH agent and add private key
+          eval $(ssh-agent -s)
+          ssh-add <(echo "$PRIVATE_KEY")
+
+          # Copy code to Deepin OS using SCP
+          scp -r /home/runner/work/project-new/project-new/* umer@MuhammadAsim:/home/umer/Desktop/octi
